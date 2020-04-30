@@ -1,40 +1,44 @@
-import {getQuestions} from '../utils/api';
-import {showLoading, hideLoading} from 'react-redux-loading';
+import * as Types from './types';
+import * as API from '../utils/api';
+import { setLoading } from './loading';
+import { getUsers } from './users';
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
-export const ADD_QUESTION = 'ADD_QUESTION';
-export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER';
+export const getQuestions = () => async (dispatch) => {
+  dispatch(setLoading(true));
 
-export function receiveQuestions(questions) {
-    return {
-        type: RECEIVE_QUESTIONS,
-        questions
-    }
-}
+  const questions = await API.getQuestions();
 
-export function addQuestion(question) {
-    return {
-        type: ADD_QUESTION,
-        question
-    }
-}
+  dispatch({
+    type: Types.GET_QUESTIONS,
+    payload: questions,
+  });
 
-export function addQuestionAnswer(authedUser, questionId, selectedOption) {
-    return {
-        type: ADD_QUESTION_ANSWER,
-        authedUser,
-        questionId,
-        selectedOption
-    }
-}
+  dispatch(setLoading(false));
+};
 
-export function handleGetQuestions() {
-    return (dispatch) => {
-        dispatch(showLoading());
-        return getQuestions()
-            .then((questions) => {
-                dispatch(receiveQuestions(questions));
-                dispatch(hideLoading());
-            });
-    }
-}
+export const addQuestion = (question) => async (dispatch) => {
+  dispatch(setLoading(true));
+
+  const formattedQuestion = await API.saveQuestion(question);
+
+  dispatch({
+    type: Types.ADD_QUESTION,
+    payload: formattedQuestion,
+  });
+
+  dispatch(getUsers());
+  dispatch(getQuestions());
+
+  dispatch(setLoading(false));
+};
+
+export const saveAnswer = ({ authedUser, qid, answer }) => async (dispatch) => {
+  dispatch(setLoading(true));
+
+  await API.saveQuestionAnswer({ authedUser, qid, answer });
+
+  dispatch(getUsers());
+  dispatch(getQuestions());
+
+  dispatch(setLoading(false));
+};
