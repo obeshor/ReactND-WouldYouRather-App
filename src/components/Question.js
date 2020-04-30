@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {formatQuestion} from "../utils/helpers";
+import {formatQuestion} from "../utils/helper";
 import {Link} from 'react-router-dom';
 import { Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';

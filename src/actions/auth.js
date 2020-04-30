@@ -1,4 +1,4 @@
-import {getUser} from '../utils/api';
+import {getUsers} from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const AUTH_LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -23,7 +23,7 @@ export function receiveAuthLogout() {
 export function handleLoginUser(id) {
     return (dispatch) => {
         dispatch(showLoading());
-        getUser(id).then((user) => {
+        getUsers(id).then((user) => {
             dispatch(receiveAuthLogin(user));
             dispatch(hideLoading());
         });
