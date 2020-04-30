@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UserNavItem from './UserNavItem';
 import { NavbarToggler } from './NavbarToggler';
-import { Logo } from '../shared/Logo';
+
 import { NavItemsContainer } from './NavItemsContainer';
 import { NavItem } from './NavItem';
 import LogoutButton from './LogoutButton';
@@ -11,7 +11,7 @@ import LogoutButton from './LogoutButton';
 const Navbar = ({ loggedInUser, users }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      {loggedInUser !== '' && <Logo />}
+      {loggedInUser !== '' }
       <NavbarToggler />
       <div
         className="collapse navbar-collapse justify-content-end"
