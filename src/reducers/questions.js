@@ -1,29 +1,24 @@
-import {RECEIVE_QUESTIONS, ADD_QUESTION, ADD_QUESTION_ANSWER} from "../actions/questions";
+import * as Types from '../actions/types';
 
-export default function questions(state = {}, action) {
-    switch (action.type) {
-        case RECEIVE_QUESTIONS:
-            return {
-                ...state,
-                ...action.questions
-            };
-        case ADD_QUESTION:
-            return {
-                ...state,
-                [action.question.id]: action.question
-            };
-        case ADD_QUESTION_ANSWER:
-            return {
-                ...state,
-                [action.questionId]: {
-                    ...state[action.questionId],
-                    [action.selectedOption]: {
-                        ...state[action.questionId][action.selectedOption],
-                        votes: state[action.questionId][action.selectedOption].votes.concat([action.authedUser])
-                    }
-                }
-            };
-        default:
-            return state;
-    }
+const initialState = {};
+
+export default function (state = initialState, action) {
+  const { type, payload } = action;
+
+  switch (type) {
+    case Types.GET_QUESTIONS:
+      return {
+        ...state,
+        ...payload,
+      };
+
+    case Types.ADD_QUESTION:
+      return {
+        ...state,
+        [payload.id]: payload,
+      };
+
+    default:
+      return state;
+  }
 }
