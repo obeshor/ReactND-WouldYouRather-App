@@ -19,8 +19,8 @@ const UserNavItem = ({ loggedInUser, users }) => {
           <img
             src={user.avatarURL}
             alt={user.name}
-            width="25"
-            height="25"
+            width="24"
+            height="24"
             className="mr-3 rounded-circle"
           />
         </>

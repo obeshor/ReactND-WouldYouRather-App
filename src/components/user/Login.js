@@ -6,20 +6,11 @@ import PageContainer from '../layout/shared/PageContainer';
 
 const Login = ({ users, setUser }) => {
   const [selectedUser, setSelectedUser] = useState('');
-
+ 
+  
   return (
     <>
-      <picture>
-        <source
-          type="image/webp"
-          srcSet={`${process.env.PUBLIC_URL}/img/heroImage.webp`}
-        />
-        <img
-          src={`${process.env.PUBLIC_URL}/img/heroImage.jpg`}
-          alt="Would you rather"
-          className="img-fluid"
-        />
-      </picture>
+  
       <PageContainer>
         <form
           className="form-signin text-center"
